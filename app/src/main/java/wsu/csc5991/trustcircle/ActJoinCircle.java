@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 public class ActJoinCircle extends AppCompatActivity {
 
@@ -18,6 +19,7 @@ public class ActJoinCircle extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layjoincircle);
+        ((LinearLayout)findViewById(R.id.LayJoinCircle)).setBackgroundColor(Setting.Shared.Data.backgroundColor);
 
         editTextCircleName = (EditText) findViewById(R.id.editTextCircleName);
         editTextCirclePassword = (EditText) findViewById(R.id.editTextCirclePassword);

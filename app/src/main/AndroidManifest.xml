@@ -21,6 +21,7 @@
         <activity android:name=".ActCircleSignUp"></activity>
         <activity android:name=".ActEditCircle"></activity>
         <activity android:name=".ActDeleteCircle"></activity>
+        <activity android:name=".ActDisplayCircle"></activity>
     </application>
 
 </manifest>

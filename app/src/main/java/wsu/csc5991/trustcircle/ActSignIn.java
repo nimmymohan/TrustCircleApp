@@ -1,5 +1,8 @@
 package wsu.csc5991.trustcircle;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,16 +10,15 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import wsu.csc5991.trustcircle.vo.Greeting;
+import java.util.Set;
 
-//import javax.ws.rs.client.Client;
-//import javax.ws.rs.client.ClientBuilder;
-//import javax.ws.rs.client.WebTarget;
+import wsu.csc5991.trustcircle.vo.Member;
 
 
 public class ActSignIn extends AppCompatActivity {
@@ -24,13 +26,15 @@ public class ActSignIn extends AppCompatActivity {
     EditText editTextMobileNumberToLogin;
     EditText editTextPasswordToLogin;
     Button buttonSignIn;
+    int pin;
 
-    private static final String REST_URL_BASE_DOMAIN = "http://det-sasidhav-m.sea.ds.adp.com:8080/member/mobile/1002003000";
+    private static final String REST_URL_BASE_DOMAIN = "http://10.0.2.2:8080";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.laysignin);
+        ((LinearLayout)findViewById(R.id.LaySignIn)).setBackgroundColor(Setting.Shared.Data.backgroundColor);
 
         editTextMobileNumberToLogin = (EditText) findViewById(R.id.editTextMobileNumberToLogin);
         editTextPasswordToLogin = (EditText) findViewById(R.id.editTextPasswordToLogin);
@@ -38,41 +42,41 @@ public class ActSignIn extends AppCompatActivity {
 
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                String mobileNumber = editTextMobileNumberToLogin.getText().toString();
+                String password = editTextPasswordToLogin.getText().toString();
                 boolean isValidInput = true;
-                if (editTextMobileNumberToLogin.getText().length() != 10) {
+                if (mobileNumber.length() != 10) {
                     editTextMobileNumberToLogin.setError("Mobile number should be 10 digits long!");
                     isValidInput = false;
                 }
-                if (editTextPasswordToLogin.getText().length() == 0) {
+                if (password.length() == 0) {
                     editTextPasswordToLogin.setError("Password is required to sign in!");
                     isValidInput = false;
                 }
                 if (isValidInput) {
-                    new HttpRequestTask().execute();
+                    new HttpRequestTask().execute(mobileNumber, password);
                 }
             }
         });
     }
 
-    private class HttpRequestTask extends AsyncTask<String, Void, Greeting> {
+    private class HttpRequestTask extends AsyncTask<String, Void, Member> {
         @Override
-        protected Greeting doInBackground(String... params) {
+        protected Member doInBackground(String... params) {
             try {
-                //String url = REST_URL_BASE_DOMAIN+"/TrustCircleService/TrustCircleService/members/"+params[0];
-                String url = REST_URL_BASE_DOMAIN+"/greeting";
+                String url = REST_URL_BASE_DOMAIN+"/member/mobile/"+params[0];
 
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                Greeting greeting = restTemplate.getForObject(url, Greeting.class);
+                Member member = restTemplate.getForObject(url, Member.class);
 
-                System.out.println(greeting);
+                System.out.println(member.getMobileNumber());
+                System.out.println(member.getPin());
+                System.out.println(params[1]);
 
-//                Client client = ClientBuilder.newClient();
-//                WebTarget webTarget = client.target(url);
-//                String response = webTarget.request().get(String.class);
-//                System.out.println(response);
+                pin = Integer.parseInt(params[1]);
 
-                return greeting;
+                return member;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -80,18 +84,30 @@ public class ActSignIn extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Greeting greeting) {
-            if(greeting != null){
-                System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+greeting.getId());
-                System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"+greeting.getContent());
-
-                Toast toast = Toast.makeText(getApplicationContext(), "The content is " + greeting.getContent(), Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP | Gravity.START, 0, 0);
-                toast.show();
-
+        protected void onPostExecute(Member member) {
+            if(member != null) {
+                if (pin == member.getPin()) {
+                    Intent i = new Intent(getApplicationContext(), ActDisplayCircle.class);
+                    startActivity(i);
+                } else {
+                    showDialogBox("Invalid Password!");
+                }
             } else {
-                System.out.println("Null greetings");
+                showDialogBox("Invalid User!");
             }
+        }
+
+        private void showDialogBox(String message) {
+            AlertDialog alertDialog = new AlertDialog.Builder(ActSignIn.this).create();
+            alertDialog.setTitle("Trust Circle SignIn");
+            alertDialog.setMessage(message);
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
         }
     }
 }

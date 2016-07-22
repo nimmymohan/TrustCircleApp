@@ -38,38 +38,38 @@ public class ActMain extends AppCompatActivity {
 
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ActSignIn.class);
-                startActivity(i);
+            Intent i = new Intent(getApplicationContext(),ActSignIn.class);
+            startActivity(i);
             }
         });
         buttonJoinCircle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ActJoinCircle.class);
-                startActivity(i);
+            Intent i = new Intent(getApplicationContext(),ActJoinCircle.class);
+            startActivity(i);
             }
         });
         buttonMemberSignUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ActMemberSignUp.class);
-                startActivity(i);
+            Intent i = new Intent(getApplicationContext(),ActMemberSignUp.class);
+            startActivity(i);
             }
         });
         buttonCircleSignUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ActCircleSignUp.class);
-                startActivity(i);
+            Intent i = new Intent(getApplicationContext(),ActCircleSignUp.class);
+            startActivity(i);
             }
         });
         buttonEditCircle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ActEditCircle.class);
-                startActivity(i);
+            Intent i = new Intent(getApplicationContext(),ActEditCircle.class);
+            startActivity(i);
             }
         });
         buttonDeleteCircle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),ActDeleteCircle.class);
-                startActivity(i);
+            Intent i = new Intent(getApplicationContext(),ActDeleteCircle.class);
+            startActivity(i);
             }
         });
     }
@@ -80,12 +80,11 @@ public class ActMain extends AppCompatActivity {
             MenuItem mi = menu.getItem(i);
             String title = mi.getTitle().toString();
             Spannable newTitle = new SpannableString(title);
-            newTitle.setSpan(new ForegroundColorSpan(Color.BLUE), 0, newTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            newTitle.setSpan(new ForegroundColorSpan(Color.BLACK), 0, newTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             mi.setTitle(newTitle);
         }
         return true;
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -96,18 +95,21 @@ public class ActMain extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        LinearLayout rl = (LinearLayout)findViewById(R.id.LayMain);
         switch (item.getItemId()) {
-            case R.id.bg_red:
-                rl.setBackgroundColor(Color.RED);
+            case R.id.bg_white:
+                changeBackgroundColor(getResources().getColor(R.color.ghost_white));
+                return true;
+
+            case R.id.bg_yellow:
+                changeBackgroundColor(getResources().getColor(R.color.light_yellow));
                 return true;
 
             case R.id.bg_green:
-                rl.setBackgroundColor(Color.GREEN);
+                changeBackgroundColor(getResources().getColor(R.color.light_green));
                 return true;
 
             case R.id.bg_blue:
-                rl.setBackgroundColor(Color.BLUE);
+                changeBackgroundColor(getResources().getColor(R.color.light_blue));
                 return true;
 
             case R.id.help:
@@ -119,5 +121,10 @@ public class ActMain extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void changeBackgroundColor(int color) {
+        ((LinearLayout)findViewById(R.id.LayMain)).setBackgroundColor(color);
+        Setting.Shared.Data.backgroundColor = color;
     }
 }

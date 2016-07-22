@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 public class ActMemberSignUp extends AppCompatActivity {
 
@@ -19,6 +20,7 @@ public class ActMemberSignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.laymembersignup);
+        ((LinearLayout)findViewById(R.id.LayMemberSignUp)).setBackgroundColor(Setting.Shared.Data.backgroundColor);
 
         editTextMobileNumber = (EditText) findViewById(R.id.editTextMobileNumber);
         editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
