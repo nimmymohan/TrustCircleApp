@@ -113,9 +113,8 @@ public class ActMain extends AppCompatActivity {
                 return true;
 
             case R.id.help:
-                Toast toast = Toast.makeText(getApplicationContext(), "RAKSHIKANEY", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP | Gravity.START, 0, 0);
-                toast.show();
+                Intent i = new Intent(getApplicationContext(),ActHelp.class);
+                startActivity(i);
                 return true;
 
             default:

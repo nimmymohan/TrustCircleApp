@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LayDisplayCircle"
+    android:id="@+id/LayHelp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
@@ -11,7 +11,7 @@
         android:id="@+id/txtDisplayCircle"
         android:gravity="center"
         android:textSize="25dp"
-        android:text="LOGIN SUCCESSFUL :-)\n\nThe circle member locations will be displayed here soon!"
+        android:text="RAKSHIKANEYYY!\nRAKSHIKANEYYY!\nRAKSHIKANEYYY!"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
