@@ -25,7 +25,7 @@ public class ActSignIn extends AppCompatActivity {
     EditText editTextPasswordToLogin;
     Button buttonSignIn;
 
-    private static final String REST_URL_BASE_DOMAIN = "http://10.0.2.2:8080";
+    private static final String REST_URL_BASE_DOMAIN = "http://det-sasidhav-m.sea.ds.adp.com:8080/member/mobile/1002003000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

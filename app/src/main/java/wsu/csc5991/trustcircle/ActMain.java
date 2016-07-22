@@ -1,10 +1,19 @@
 package wsu.csc5991.trustcircle;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class ActMain extends AppCompatActivity {
 
@@ -63,5 +72,52 @@ public class ActMain extends AppCompatActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        for (int i=0; i<menu.size(); i++) {
+            MenuItem mi = menu.getItem(i);
+            String title = mi.getTitle().toString();
+            Spannable newTitle = new SpannableString(title);
+            newTitle.setSpan(new ForegroundColorSpan(Color.BLUE), 0, newTitle.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mi.setTitle(newTitle);
+        }
+        return true;
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menuitems, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        LinearLayout rl = (LinearLayout)findViewById(R.id.LayMain);
+        switch (item.getItemId()) {
+            case R.id.bg_red:
+                rl.setBackgroundColor(Color.RED);
+                return true;
+
+            case R.id.bg_green:
+                rl.setBackgroundColor(Color.GREEN);
+                return true;
+
+            case R.id.bg_blue:
+                rl.setBackgroundColor(Color.BLUE);
+                return true;
+
+            case R.id.help:
+                Toast toast = Toast.makeText(getApplicationContext(), "RAKSHIKANEY", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP | Gravity.START, 0, 0);
+                toast.show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
