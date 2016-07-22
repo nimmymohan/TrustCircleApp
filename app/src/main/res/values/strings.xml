@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TrustCircle</string>
+    <string name="rest_service_url">http://10.0.2.2:8080</string>
 </resources>

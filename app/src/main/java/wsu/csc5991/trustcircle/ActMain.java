@@ -38,38 +38,38 @@ public class ActMain extends AppCompatActivity {
 
         buttonSignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            Intent i = new Intent(getApplicationContext(),ActSignIn.class);
-            startActivity(i);
+                Intent i = new Intent(getApplicationContext(),ActSignIn.class);
+                startActivity(i);
             }
         });
         buttonJoinCircle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            Intent i = new Intent(getApplicationContext(),ActJoinCircle.class);
-            startActivity(i);
+                Intent i = new Intent(getApplicationContext(),ActJoinCircle.class);
+                startActivity(i);
             }
         });
         buttonMemberSignUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            Intent i = new Intent(getApplicationContext(),ActMemberSignUp.class);
-            startActivity(i);
+                Intent i = new Intent(getApplicationContext(),ActMemberSignUp.class);
+                startActivity(i);
             }
         });
         buttonCircleSignUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            Intent i = new Intent(getApplicationContext(),ActCircleSignUp.class);
-            startActivity(i);
+                Intent i = new Intent(getApplicationContext(),ActCircleSignUp.class);
+                startActivity(i);
             }
         });
         buttonEditCircle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            Intent i = new Intent(getApplicationContext(),ActEditCircle.class);
-            startActivity(i);
+                Intent i = new Intent(getApplicationContext(),ActEditCircle.class);
+                startActivity(i);
             }
         });
         buttonDeleteCircle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            Intent i = new Intent(getApplicationContext(),ActDeleteCircle.class);
-            startActivity(i);
+                Intent i = new Intent(getApplicationContext(),ActDeleteCircle.class);
+                startActivity(i);
             }
         });
     }

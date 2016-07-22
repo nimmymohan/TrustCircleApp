@@ -6,17 +6,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Set;
 
 import wsu.csc5991.trustcircle.vo.Member;
 
@@ -27,8 +23,6 @@ public class ActSignIn extends AppCompatActivity {
     EditText editTextPasswordToLogin;
     Button buttonSignIn;
     int pin;
-
-    private static final String REST_URL_BASE_DOMAIN = "http://10.0.2.2:8080";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +58,11 @@ public class ActSignIn extends AppCompatActivity {
         @Override
         protected Member doInBackground(String... params) {
             try {
-                String url = REST_URL_BASE_DOMAIN+"/member/mobile/"+params[0];
+                String url = getResources().getString(R.string.rest_service_url) + "/member/mobile/" + params[0];
 
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
                 Member member = restTemplate.getForObject(url, Member.class);
-
-                System.out.println(member.getMobileNumber());
-                System.out.println(member.getPin());
-                System.out.println(params[1]);
-
                 pin = Integer.parseInt(params[1]);
 
                 return member;
@@ -90,24 +79,11 @@ public class ActSignIn extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), ActDisplayCircle.class);
                     startActivity(i);
                 } else {
-                    showDialogBox("Invalid Password!");
+                    Setting.showDialogBox(ActSignIn.this, "Trust Circle SignIn", "Invalid Password!");
                 }
             } else {
-                showDialogBox("Invalid User!");
+                Setting.showDialogBox(ActSignIn.this, "Trust Circle SignIn", "Invalid User!");
             }
-        }
-
-        private void showDialogBox(String message) {
-            AlertDialog alertDialog = new AlertDialog.Builder(ActSignIn.this).create();
-            alertDialog.setTitle("Trust Circle SignIn");
-            alertDialog.setMessage(message);
-            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-            alertDialog.show();
         }
     }
 }

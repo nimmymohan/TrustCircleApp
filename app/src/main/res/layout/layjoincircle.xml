@@ -18,8 +18,8 @@
         android:id="@+id/editTextCirclePassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Circle Password"
-        android:inputType="textPassword" />
+        android:hint="Circle Pin"
+        android:inputType="numberPassword" />
 
     <EditText
         android:id="@+id/editTextMemberMobileNumber"
@@ -32,8 +32,8 @@
         android:id="@+id/editTextMemberPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Member Password"
-        android:inputType="textPassword" />
+        android:hint="Member Pin"
+        android:inputType="numberPassword" />
 
     <Button
         android:id="@+id/buttonJoinCircle"

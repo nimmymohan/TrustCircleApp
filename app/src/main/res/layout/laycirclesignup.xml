@@ -18,8 +18,15 @@
         android:id="@+id/editTextCirclePassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Circle Password"
-        android:inputType="textPassword" />
+        android:hint="Circle Pin"
+        android:inputType="numberPassword" />
+
+    <EditText
+        android:id="@+id/editTextConfirmCirclePassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="Confirm Circle Pin"
+        android:inputType="numberPassword" />
 
     <EditText
         android:id="@+id/editTextPrimaryMemberMobileNumber"
@@ -31,8 +38,8 @@
         android:id="@+id/editTextPrimaryMemberPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="Primary Member Password"
-        android:inputType="textPassword" />
+        android:hint="Primary Member Pin"
+        android:inputType="numberPassword" />
 
     <Button
         android:id="@+id/buttonCreateCircle"
