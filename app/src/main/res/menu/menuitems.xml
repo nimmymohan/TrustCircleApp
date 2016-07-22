@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/bg_red"
+        android:orderInCategory="1"
+        android:title="Set BGColor to Red"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/bg_green"
+        android:orderInCategory="2"
+        android:title="Set BGColor to Green"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/bg_blue"
+        android:orderInCategory="3"
+        android:title="Set BGColor to Blue"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/help"
+        android:orderInCategory="4"
+        android:title="HELP"
+        app:showAsAction="never" />
+</menu>
