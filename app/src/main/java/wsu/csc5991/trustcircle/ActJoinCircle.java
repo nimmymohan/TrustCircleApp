@@ -68,7 +68,6 @@ public class ActJoinCircle extends AppCompatActivity {
         });
     }
 
-    // TO BE MODIFIED - UNDER PROGRESS
     private class HttpRequestTask extends AsyncTask<String, Void, Boolean> {
 
         String errorMessage = null;
@@ -87,24 +86,35 @@ public class ActJoinCircle extends AppCompatActivity {
                 Member member = new Member();
                 member.setMobileNumber(Integer.parseInt(params[2]));
                 member.setPin(Integer.parseInt(params[3]));
-                circle.setPrimaryMember(member);
+                circle.getMembers().add(member);
+
+                String getCircleUrl = getResources().getString(R.string.rest_service_url) + "/circle/search/?name=" + params[0];
+                Circle storedCircle = restTemplate.getForObject(getCircleUrl, Circle.class);
 
                 String getMemberUrl = getResources().getString(R.string.rest_service_url) + "/member/mobile/" + params[2];
                 Member storedMember = restTemplate.getForObject(getMemberUrl, Member.class);
 
-                if (storedMember != null) {
-                    if (storedMember.getPin() == Integer.parseInt(params[3])) {
-                        String circleSignUpUrl = getResources().getString(R.string.rest_service_url) + "/circle";
-                        //output = restTemplate.postForObject(new URI(circleSignUpUrl), circle, Boolean.class);
+                if (storedCircle != null) {
+                    if (storedCircle.getPin() == Integer.parseInt(params[1])) {
+                        if (storedMember != null) {
+                            if (storedMember.getPin() == Integer.parseInt(params[3])) {
+                                String joinCircleUrl = getResources().getString(R.string.rest_service_url) + "/circle/name/" + params[0];
+                                output = restTemplate.postForObject(new URI(joinCircleUrl), circle, Boolean.class);
+                            } else {
+                                errorMessage = "Trust Circle enrolment failed!\nInvalid member pin, please enter the correct member pin.";
+                            }
+                        } else {
+                            errorMessage = "Trust Circle enrolment failed!\nMember not registered, please sign up the member first.";
+                        }
                     } else {
-                        errorMessage = "Trust Circle creation failed!\nInvalid member pin, please enter the correct member pin.";
+                        errorMessage = "Trust Circle enrolment failed!\nInvalid circle pin, please enter the correct circle pin.";
                     }
                 } else {
-                    errorMessage = "Trust Circle creation failed!\nMember not registered, please sign up the member first.";
+                    errorMessage = "Trust Circle enrolment failed!\nCircle not registered, please create the circle first.";
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                errorMessage = "Trust Circle creation failed!\nMember not registered, please sign up the member first.";
+                errorMessage = "Trust Circle enrolment failed!\nPlease enter correct values and try again.";
             }
             return output;
         }
@@ -112,10 +122,10 @@ public class ActJoinCircle extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean output) {
             if (output) {
-                Setting.showDialogBox(ActJoinCircle.this, "Trust Circle SignUp", "Trust Circle successfully created!");
+                Setting.showDialogBox(ActJoinCircle.this, "Trust Circle Enrolment", "Trust Circle enrolment successful!");
             } else {
-                errorMessage = errorMessage != null ? errorMessage : "Trust Circle creation failed!";
-                Setting.showDialogBox(ActJoinCircle.this, "Trust Circle SignUp", errorMessage);
+                errorMessage = errorMessage != null ? errorMessage : "Trust Circle enrolment failed!";
+                Setting.showDialogBox(ActJoinCircle.this, "Trust Circle Enrolment", errorMessage);
             }
         }
     }
