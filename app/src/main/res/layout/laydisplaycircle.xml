@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/LayDisplayCircle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical" >
+    android:layout_alignParentLeft="true" >
 
-    <TextView
-        android:id="@+id/txtDisplayCircle"
-        android:gravity="center"
-        android:textSize="25dp"
-        android:text="LOGIN SUCCESSFUL :-)\n\nThe circle member locations will be displayed here soon!"
+    <HorizontalScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-</LinearLayout>
+        <RelativeLayout
+            android:id="@+id/RelativeLayout1"
+            android:layout_width="fill_parent"
+            android:layout_gravity="center"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="25dp">
+
+            <TableLayout
+                android:id="@+id/MainTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" >
+            </TableLayout>
+
+        </RelativeLayout>
+    </HorizontalScrollView>
+</ScrollView>
