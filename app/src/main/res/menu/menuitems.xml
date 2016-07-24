@@ -2,32 +2,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/bg_white"
-        android:orderInCategory="0"
-        android:title="ReSet BGColor to White"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/bg_yellow"
+        android:id="@+id/about"
         android:orderInCategory="1"
-        android:title="Set BGColor to Yellow"
+        android:title="About"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/bg_green"
+        android:id="@+id/settings"
         android:orderInCategory="2"
-        android:title="Set BGColor to Green"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/bg_blue"
-        android:orderInCategory="3"
-        android:title="Set BGColor to Blue"
+        android:title="Settings"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/help"
-        android:orderInCategory="4"
-        android:title="HELP"
+        android:orderInCategory="3"
+        android:title="Help"
         app:showAsAction="never" />
 </menu>

@@ -18,13 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActCircleConfig" />
-        <activity android:name=".ActJoinCircle" />
-        <activity android:name=".ActMemberSignUp" />
         <activity android:name=".ActCircleSignUp" />
+        <activity android:name=".ActCircleConfig" />
         <activity android:name=".ActEditCircle" />
         <activity android:name=".ActDeleteCircle" />
+        <activity android:name=".ActJoinCircle" />
         <activity android:name=".ActDisplayCircle" />
+        <activity android:name=".ActMemberSignUp" />
+        <activity android:name=".ActAbout" />
+        <activity android:name=".ActSettings" />
         <activity android:name=".ActHelp" />
     </application>
 

@@ -7,38 +7,38 @@
     android:orientation="vertical" >
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextCircleName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Circle Name" >
         <requestFocus />
     </EditText>
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextCirclePassword"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Circle Pin"
-        android:inputType="numberPassword" />
+        android:inputType="numberPassword"
+        />
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextMemberMobileNumber"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Member Mobile Number"
-        android:inputType="number" />
+        android:inputType="number"
+        />
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextMemberPassword"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Member Pin"
-        android:inputType="numberPassword" />
+        android:inputType="numberPassword"
+        android:layout_marginBottom="30dp"
+        />
 
     <Button
+        style="@style/BTNStyle"
         android:id="@+id/buttonJoinCircle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Join Circle" />
+        android:text="Join Circle"
+        />
 
 </LinearLayout>

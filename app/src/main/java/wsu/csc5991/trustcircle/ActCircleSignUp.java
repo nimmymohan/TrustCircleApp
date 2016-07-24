@@ -16,7 +16,7 @@ import java.net.URI;
 import wsu.csc5991.trustcircle.vo.Circle;
 import wsu.csc5991.trustcircle.vo.Member;
 
-public class ActCircleSignUp extends AppCompatActivity {
+public class ActCircleSignUp extends ActBase {
 
     EditText editTextCircleName;
     EditText editTextCirclePassword;
@@ -28,6 +28,8 @@ public class ActCircleSignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.laycirclesignup);
+        ((LinearLayout)findViewById(R.id.LayCircleSignUp)).setBackgroundColor(Util.Shared.Data.backgroundColor);
 
         // Define and show application icon
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
@@ -35,8 +37,6 @@ public class ActCircleSignUp extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
 
-        setContentView(R.layout.laycirclesignup);
-        ((LinearLayout)findViewById(R.id.LayCircleSignUp)).setBackgroundColor(Setting.Shared.Data.backgroundColor);
 
         editTextCircleName = (EditText) findViewById(R.id.editTextCircleName);
         editTextCirclePassword = (EditText) findViewById(R.id.editTextCirclePassword);
@@ -129,10 +129,10 @@ public class ActCircleSignUp extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean output) {
             if (output) {
-                Setting.showDialogBox(ActCircleSignUp.this, "Trust Circle SignUp", "Trust Circle successfully created!");
+                Util.showDialogBox(ActCircleSignUp.this, "Trust Circle SignUp", "Trust Circle successfully created!");
             } else {
                 errorMessage = errorMessage != null ? errorMessage : "Trust Circle creation failed!";
-                Setting.showDialogBox(ActCircleSignUp.this, "Trust Circle SignUp", errorMessage);
+                Util.showDialogBox(ActCircleSignUp.this, "Trust Circle SignUp", errorMessage);
             }
         }
     }

@@ -1,32 +1,25 @@
 package wsu.csc5991.trustcircle;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
-import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-public class ActDisplayCircle extends AppCompatActivity {
+public class ActDisplayCircle extends ActBase {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.laydisplaycircle);
+        ((ScrollView)findViewById(R.id.LayDisplayCircle)).setBackgroundColor(Util.Shared.Data.backgroundColor);
 
         // Define and show application icon
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.mipmap.ic_launcher);
         actionBar.setDisplayShowHomeEnabled(true);
-
-
-        setContentView(R.layout.laydisplaycircle);
-        ((ScrollView)findViewById(R.id.LayDisplayCircle)).setBackgroundColor(Setting.Shared.Data.backgroundColor);
 
         init();
     }

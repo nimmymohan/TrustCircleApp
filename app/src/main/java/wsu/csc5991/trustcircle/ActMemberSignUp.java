@@ -16,7 +16,7 @@ import java.net.URI;
 
 import wsu.csc5991.trustcircle.vo.Member;
 
-public class ActMemberSignUp extends AppCompatActivity {
+public class ActMemberSignUp extends ActBase {
 
     EditText editTextMobileNumber;
     EditText editTextFirstName;
@@ -28,15 +28,13 @@ public class ActMemberSignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.laymembersignup);
+        ((LinearLayout)findViewById(R.id.LayMemberSignUp)).setBackgroundColor(Util.Shared.Data.backgroundColor);
 
         // Define and show application icon
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.mipmap.ic_launcher);
         actionBar.setDisplayShowHomeEnabled(true);
-
-
-        setContentView(R.layout.laymembersignup);
-        ((LinearLayout)findViewById(R.id.LayMemberSignUp)).setBackgroundColor(Setting.Shared.Data.backgroundColor);
 
         editTextMobileNumber = (EditText) findViewById(R.id.editTextMobileNumber);
         editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
@@ -115,7 +113,7 @@ public class ActMemberSignUp extends AppCompatActivity {
         @Override
         protected void onPostExecute(Member member) {
             if (member != null &&  member.getMobileNumber() >0) {
-                Setting.showDialogBox(ActMemberSignUp.this, "Trust Circle Member SignUp", "Member successfully created!");
+                Util.showDialogBox(ActMemberSignUp.this, "Trust Circle Member SignUp", "Member successfully created!");
                     Intent i = new Intent(getApplicationContext(), ActCircleConfig.class);
                         i.putExtra("m_Id", member.getId());
                         i.putExtra("m_Phone", member.getMobileNumber());
@@ -124,7 +122,7 @@ public class ActMemberSignUp extends AppCompatActivity {
                         i.putExtra("m_pin", member.getPin());
                         startActivity(i);
             } else {
-                Setting.showDialogBox(ActMemberSignUp.this, "Trust Circle Member SignUp", "Member creation failed!");
+                Util.showDialogBox(ActMemberSignUp.this, "Trust Circle Member SignUp", "Member creation failed!");
             }
         }
     }

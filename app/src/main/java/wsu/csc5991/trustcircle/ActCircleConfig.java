@@ -24,7 +24,7 @@ import java.text.DecimalFormat;
 import wsu.csc5991.trustcircle.task.RecordEventTask;
 import wsu.csc5991.trustcircle.vo.Member;
 
-public class ActCircleConfig extends AppCompatActivity {
+public class ActCircleConfig extends ActBase {
     Button buttonJoinCircle;
     Button buttonCircleSignUp;
     Button buttonEditCircle;
@@ -45,7 +45,7 @@ public class ActCircleConfig extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.laycircleconfig);
-        ((LinearLayout)findViewById(R.id.LayMain)).setBackgroundColor(Setting.Shared.Data.backgroundColor);
+        ((LinearLayout)findViewById(R.id.LayCircleConfig)).setBackgroundColor(Util.Shared.Data.backgroundColor);
 
         // Define and show application icon
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();

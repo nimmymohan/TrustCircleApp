@@ -18,7 +18,7 @@ import java.util.List;
 import wsu.csc5991.trustcircle.vo.Circle;
 import wsu.csc5991.trustcircle.vo.Member;
 
-public class ActJoinCircle extends AppCompatActivity {
+public class ActJoinCircle extends ActBase {
 
     EditText editTextCircleName;
     EditText editTextCirclePassword;
@@ -30,7 +30,7 @@ public class ActJoinCircle extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layjoincircle);
-        ((LinearLayout)findViewById(R.id.LayJoinCircle)).setBackgroundColor(Setting.Shared.Data.backgroundColor);
+        ((LinearLayout)findViewById(R.id.LayJoinCircle)).setBackgroundColor(Util.Shared.Data.backgroundColor);
 
         editTextCircleName = (EditText) findViewById(R.id.editTextCircleName);
         editTextCirclePassword = (EditText) findViewById(R.id.editTextCirclePassword);
@@ -126,10 +126,10 @@ public class ActJoinCircle extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean output) {
             if (output) {
-                Setting.showDialogBox(ActJoinCircle.this, "Trust Circle Enrolment", "Trust Circle enrolment successful!");
+                Util.showDialogBox(ActJoinCircle.this, "Trust Circle Enrolment", "Trust Circle enrolment successful!");
             } else {
                 errorMessage = errorMessage != null ? errorMessage : "Trust Circle enrolment failed!";
-                Setting.showDialogBox(ActJoinCircle.this, "Trust Circle Enrolment", errorMessage);
+                Util.showDialogBox(ActJoinCircle.this, "Trust Circle Enrolment", errorMessage);
             }
         }
     }

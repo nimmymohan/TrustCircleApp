@@ -7,44 +7,45 @@
     android:orientation="vertical" >
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextCircleName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Circle Name" >
         <requestFocus />
     </EditText>
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextCirclePassword"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Circle Pin"
-        android:inputType="numberPassword" />
+        android:inputType="numberPassword"
+        />
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextConfirmCirclePassword"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Confirm Circle Pin"
-        android:inputType="numberPassword" />
+        android:inputType="numberPassword"
+        />
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextPrimaryMemberMobileNumber"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:hint="Primary Member Mobile Number" />
+        android:hint="Primary Member Mobile Number"
+        android:inputType="number"
+        />
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextPrimaryMemberPassword"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Primary Member Pin"
-        android:inputType="numberPassword" />
+        android:inputType="numberPassword"
+        android:layout_marginBottom="30dp"
+        />
 
     <Button
+        style="@style/BTNStyle"
         android:id="@+id/buttonCreateCircle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Create Circle" />
+        android:text="Create Circle"
+        />
 
 </LinearLayout>

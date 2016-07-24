@@ -14,32 +14,45 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 import wsu.csc5991.trustcircle.vo.Member;
 
-public class ActMain extends AppCompatActivity {
+public class ActMain extends ActBase {
 
     EditText etPhoneNumber;
     EditText etPin;
     Button btnSignIn;
-    Button btnRegisterUser;
-    int pin;
+    Button btnSignUp;
+    int enteredMemberPin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.laymain);
+        ((LinearLayout)findViewById(R.id.LayMain)).setBackgroundColor(Util.Shared.Data.backgroundColor);
 
         // Define and show application icon
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.mipmap.ic_launcher);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        setContentView(R.layout.laymain);
-
         etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
         etPin = (EditText) findViewById(R.id.etPin);
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
-        btnRegisterUser = (Button) findViewById(R.id.btnRegisterUser);
+        btnSignUp = (Button) findViewById(R.id.btnSignUp);
+
+        btnSignIn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                signIn(v);
+            }
+        });
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ActMemberSignUp.class);
+                startActivity(i);
+            }
+        });
     }
 
-    public void login(View view){
+    public void signIn(View view){
         String mobileNumber = etPhoneNumber.getText().toString();
         String password = etPin.getText().toString();
         boolean isValidInput = true;
@@ -56,88 +69,40 @@ public class ActMain extends AppCompatActivity {
         }
     }
 
-    public void registerNewMember(View view){
-        Intent i = new Intent(getApplicationContext(), ActMemberSignUp.class);
-        startActivity(i);
-    }
-
-
     private class HttpRequestTask extends AsyncTask<String, Void, Member> {
         @Override
         protected Member doInBackground(String... params) {
+            Member member = null;
+            enteredMemberPin = Integer.parseInt(params[1]);
             try {
-                String url = getResources().getString(R.string.rest_service_url) + "/member/mobile/" + params[0];
-
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                Member member = restTemplate.getForObject(url, Member.class);
-                pin = Integer.parseInt(params[1]);
 
-                return member;
+                String url = getResources().getString(R.string.rest_service_url) + "/member/mobile/" + params[0];
+                member = restTemplate.getForObject(url, Member.class);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return null;
+            return member;
         }
 
         @Override
         protected void onPostExecute(Member member) {
             if(member != null) {
-                if (pin == member.getPin()) {
+                if (enteredMemberPin == member.getPin()) {
                     Intent i = new Intent(getApplicationContext(), ActDisplayCircle.class);
-                    i.putExtra("m_Id", member.getId());
-                    i.putExtra("m_Phone", member.getMobileNumber());
+                    i.putExtra("m_id", member.getId());
+                    i.putExtra("m_mobile_number", member.getMobileNumber());
                     i.putExtra("m_first_name", member.getFirstName());
                     i.putExtra("m_last_name", member.getLastName());
                     i.putExtra("m_pin", member.getPin());
                     startActivity(i);
                 } else {
-                    Setting.showDialogBox(ActMain.this, "Trust Circle SignIn", "Invalid login!");
+                    Util.showDialogBox(ActMain.this, "Trust Circle SignIn", "Invalid pin, please enter correct pin!");
                 }
             } else {
-                Setting.showDialogBox(ActMain.this, "Trust Circle SignIn", "Invalid login!");
+                Util.showDialogBox(ActMain.this, "Trust Circle SignIn", "Invalid member, please sign-up first!");
             }
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menuitems, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.bg_white:
-                changeBackgroundColor(getResources().getColor(R.color.ghost_white));
-                return true;
-
-            case R.id.bg_yellow:
-                changeBackgroundColor(getResources().getColor(R.color.light_yellow));
-                return true;
-
-            case R.id.bg_green:
-                changeBackgroundColor(getResources().getColor(R.color.light_green));
-                return true;
-
-            case R.id.bg_blue:
-                changeBackgroundColor(getResources().getColor(R.color.light_blue));
-                return true;
-
-            case R.id.help:
-                Intent i = new Intent(getApplicationContext(), ActHelp.class);
-                startActivity(i);
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void changeBackgroundColor(int color) {
-        ((LinearLayout) findViewById(R.id.LaySignIn)).setBackgroundColor(color);
-        Setting.Shared.Data.backgroundColor = color;
     }
 }

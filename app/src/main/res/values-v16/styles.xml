@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- OverFlow menu Styles -->
+    <style name="PopupMenuListView" parent="@style/Widget.AppCompat.Light.ListView.DropDown">
+        <item name="android:divider">#000000</item>
+        <item name="android:dividerHeight">2dp</item>
+    </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textSize">25dp</item>
+    </style>
+
+    <style name="spinner_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/spinner_style</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:popupBackground">#DFFFFFFF</item>
+    </style>
+
     <style name="ETStyle">
         <item name="android:layout_width">350dp</item>
         <item name="android:layout_height">35dp</item>

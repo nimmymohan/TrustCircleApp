@@ -7,11 +7,15 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="android:dropDownListViewStyle">@style/PopupMenuListView</item>
+        <item name="dropDownListViewStyle">@style/PopupMenuListView</item>
+
         <!-- To change the popup menu and app text color  -->
+        <item name="android:itemBackground">@color/light_gray</item>
         <item name="android:textColor">@color/colorPrimary</item>
 
-        <!-- To change the background of options menu-->
-        <item name="android:itemBackground">@color/sky_blue</item>
+        <item name="android:spinnerDropDownItemStyle">@style/mySpinnerItemStyle</item>
+
     </style>
 
 </resources>

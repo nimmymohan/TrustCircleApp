@@ -7,43 +7,40 @@
     android:orientation="vertical" >
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextMobileNumber"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Mobile Number" >
         <requestFocus />
     </EditText>
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextFirstName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="First Name" />
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextLastName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Last Name" />
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextPassword"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Pin"
         android:inputType="numberPassword" />
 
     <EditText
+        style="@style/ETStyle"
         android:id="@+id/editTextConfirmPassword"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:hint="Confirm Pin"
-        android:inputType="numberPassword" />
+        android:inputType="numberPassword"
+        android:layout_marginBottom="30dp"
+        />
 
     <Button
+        style="@style/BTNStyle"
         android:id="@+id/buttonCreateMember"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Create Member" />
+        android:text="Create Member"
+        />
 
 </LinearLayout>

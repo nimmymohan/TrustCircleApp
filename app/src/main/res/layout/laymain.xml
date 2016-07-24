@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LaySignIn"
+    android:id="@+id/LayMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
@@ -10,8 +10,9 @@
         style="@style/ETStyle"
         android:id="@+id/etPhoneNumber"
         android:hint="Mobile Number"
-        android:inputType="number"
-        />
+        android:inputType="number">
+        <requestFocus/>
+    </EditText>
 
     <EditText
         style="@style/ETStyle"
@@ -25,13 +26,11 @@
         style="@style/BTNStyle"
         android:id="@+id/btnSignIn"
         android:text="Member SignIn"
-        android:onClick="login"
         />
 
     <Button
         style="@style/BTNStyle"
-        android:id="@+id/btnRegisterUser"
+        android:id="@+id/btnSignUp"
         android:text="Member SignUp"
-        android:onClick="registerNewMember"
         />
 </LinearLayout>
