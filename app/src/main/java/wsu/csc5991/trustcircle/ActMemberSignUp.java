@@ -1,5 +1,6 @@
 package wsu.csc5991.trustcircle;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,6 +28,13 @@ public class ActMemberSignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Define and show application icon
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setIcon(R.mipmap.ic_launcher);
+        actionBar.setDisplayShowHomeEnabled(true);
+
+
         setContentView(R.layout.laymembersignup);
         ((LinearLayout)findViewById(R.id.LayMemberSignUp)).setBackgroundColor(Setting.Shared.Data.backgroundColor);
 
@@ -79,32 +87,42 @@ public class ActMemberSignUp extends AppCompatActivity {
         });
     }
 
-    private class HttpRequestTask extends AsyncTask<String, Void, Boolean> {
+    private class HttpRequestTask extends AsyncTask<String, Void, Member> {
         @Override
-        protected Boolean doInBackground(String... params) {
-            Boolean output = false;
+        protected Member doInBackground(String... params) {
+            Member member = null;
             try {
                 String url = getResources().getString(R.string.rest_service_url) + "/member";
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-                Member member = new Member();
+                member = new Member();
                 member.setFirstName(params[0]);
                 member.setLastName(params[1]);
                 member.setMobileNumber(Integer.parseInt(params[2]));
                 member.setPin(Integer.parseInt(params[3]));
 
-                output = restTemplate.postForObject(new URI(url), member, Boolean.class);
+                Boolean output = restTemplate.postForObject(new URI(url), member, Boolean.class);
+                if(!output){
+                    member = null;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return output;
+            return member;
         }
 
         @Override
-        protected void onPostExecute(Boolean output) {
-            if (output) {
+        protected void onPostExecute(Member member) {
+            if (member != null &&  member.getMobileNumber() >0) {
                 Setting.showDialogBox(ActMemberSignUp.this, "Trust Circle Member SignUp", "Member successfully created!");
+                    Intent i = new Intent(getApplicationContext(), ActCircleConfig.class);
+                        i.putExtra("m_Id", member.getId());
+                        i.putExtra("m_Phone", member.getMobileNumber());
+                        i.putExtra("m_first_name", member.getFirstName());
+                        i.putExtra("m_last_name", member.getLastName());
+                        i.putExtra("m_pin", member.getPin());
+                        startActivity(i);
             } else {
                 Setting.showDialogBox(ActMemberSignUp.this, "Trust Circle Member SignUp", "Member creation failed!");
             }

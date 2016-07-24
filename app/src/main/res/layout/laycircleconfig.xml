@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/LayMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <Button
+        style="@style/BTNStyle"
+        android:id="@+id/buttonJoinCircle"
+        android:text="Join Circle"
+        />
+
+    <Button
+        style="@style/BTNStyle"
+        android:id="@+id/buttonCircleSignUp"
+        android:text="Circle SignUp"
+        />
+
+    <Button
+        style="@style/BTNStyle"
+        android:id="@+id/buttonEditCircle"
+        android:text="Edit Circle"
+        android:enabled="false"
+        />
+
+    <Button
+        style="@style/BTNStyle"
+        android:id="@+id/buttonDeleteCircle"
+        android:text="Delete Circle"
+        android:enabled="false"
+        />
+
+</LinearLayout>

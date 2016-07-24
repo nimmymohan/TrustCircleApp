@@ -1,46 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LayMain"
+    android:id="@+id/LaySignIn"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/buttonSignIn"
-        android:text="SignIn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    <EditText
+        style="@style/ETStyle"
+        android:id="@+id/etPhoneNumber"
+        android:hint="Mobile Number"
+        android:inputType="number"
+        />
+
+    <EditText
+        style="@style/ETStyle"
+        android:id="@+id/etPin"
+        android:hint="Pin"
+        android:inputType="numberPassword"
+        android:layout_marginBottom="30dp"
+        />
 
     <Button
-        android:id="@+id/buttonJoinCircle"
-        android:text="Join Circle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        style="@style/BTNStyle"
+        android:id="@+id/btnSignIn"
+        android:text="Member SignIn"
+        android:onClick="login"
+        />
 
     <Button
-        android:id="@+id/buttonMemberSignUp"
+        style="@style/BTNStyle"
+        android:id="@+id/btnRegisterUser"
         android:text="Member SignUp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/buttonCircleSignUp"
-        android:text="Circle SignUp"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/buttonEditCircle"
-        android:text="Edit Circle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/buttonDeleteCircle"
-        android:text="Delete Circle"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
-
+        android:onClick="registerNewMember"
+        />
 </LinearLayout>

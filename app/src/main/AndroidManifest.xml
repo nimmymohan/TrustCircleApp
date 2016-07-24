@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="wsu.csc5991.trustcircle">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -9,20 +11,21 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActMain">
+        <activity android:name=".ActMain"
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ActSignIn"></activity>
-        <activity android:name=".ActJoinCircle"></activity>
-        <activity android:name=".ActMemberSignUp"></activity>
-        <activity android:name=".ActCircleSignUp"></activity>
-        <activity android:name=".ActEditCircle"></activity>
-        <activity android:name=".ActDeleteCircle"></activity>
-        <activity android:name=".ActDisplayCircle"></activity>
-        <activity android:name=".ActHelp"></activity>
+        <activity android:name=".ActCircleConfig" />
+        <activity android:name=".ActJoinCircle" />
+        <activity android:name=".ActMemberSignUp" />
+        <activity android:name=".ActCircleSignUp" />
+        <activity android:name=".ActEditCircle" />
+        <activity android:name=".ActDeleteCircle" />
+        <activity android:name=".ActDisplayCircle" />
+        <activity android:name=".ActHelp" />
     </application>
 
 </manifest>

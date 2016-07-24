@@ -28,6 +28,13 @@ public class ActCircleSignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Define and show application icon
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setIcon(R.mipmap.ic_launcher);
+        actionBar.setDisplayShowHomeEnabled(true);
+
+
         setContentView(R.layout.laycirclesignup);
         ((LinearLayout)findViewById(R.id.LayCircleSignUp)).setBackgroundColor(Setting.Shared.Data.backgroundColor);
 
