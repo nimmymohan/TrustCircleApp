@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
+/**
+ * Class to display a brief description of app's functionality
+ */
 public class ActAbout extends ActBase {
 
     @Override

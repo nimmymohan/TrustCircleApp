@@ -24,6 +24,9 @@ import java.text.DecimalFormat;
 import wsu.csc5991.trustcircle.task.RecordEventTask;
 import wsu.csc5991.trustcircle.vo.Member;
 
+/**
+ * Class to handle all the buttons for configuring a circle
+ */
 public class ActCircleConfig extends ActBase {
     Button buttonJoinCircle;
     Button buttonCircleSignUp;

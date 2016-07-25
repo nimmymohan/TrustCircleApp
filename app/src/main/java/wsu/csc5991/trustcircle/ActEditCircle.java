@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
+/**
+ * Class to edit a circle
+ * TO-DO: Yet to be implemented
+ */
 public class ActEditCircle extends ActBase {
 
     @Override

@@ -1,12 +1,42 @@
+//==================================================================================================
+//
+// Title:       Trust Circle
+// Course:      CSC 5991 – Mobile Application Development in Android
+// Application: Final Project
+// Author:      Vimal Sasidharan, Nimmy Mohan Mohan
+// Date:        07/25/2016
+// Description:
+//              Trust circle app lets your family members and friends to be in a closed loop.
+//              It helps in tracking the location of a member with in the circle.
+//              The application has below screens:
+//          Main Screen
+//              ● Members can sign in using mobile number or pin
+//              ● Members can click sign up button if not already registered
+//          DisplayCircle Screen
+//              ● Signed in member's circle name will be displayed
+//              ● Circle member's latitude and longitude will be displayed in a table
+//          MemberSignUp Screen
+//              ● A new member can be created by providing mobile number, first name, last name, pin
+//          CircleConfig Screen
+//              ● This has all the buttons for configuring a circle
+//          CircleSignUp Screen
+//              ● A new circle can be created by providing circle name and pin
+//          JoinCircle Screen
+//              ● A member can join a circle by providing circle name and pin
+//          Settings Screen
+//              ● The app's background color can be changed using this screen
+//          About Screen
+//              ● A brief description of app's functionality is provided in this screen
+//          Help Screen
+//              ● This screen talks about few use cases
+//
+//==================================================================================================
+
 package wsu.csc5991.trustcircle;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,11 +45,13 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 import org.springframework.web.client.RestTemplate;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import wsu.csc5991.trustcircle.vo.Circle;
 import wsu.csc5991.trustcircle.vo.Member;
 
+/**
+ * Class for member sign in and sign up
+ */
 public class ActMain extends ActBase {
 
     EditText etPhoneNumber;
@@ -59,6 +91,11 @@ public class ActMain extends ActBase {
         });
     }
 
+    //----------------------------------------------------------------
+    // Validates the inputs
+    // If validation fails, display the error messages
+    // If validation succeeds, invoke rest service to get circle details
+    //----------------------------------------------------------------
     public void signIn(View view){
         String mobileNumber = etPhoneNumber.getText().toString();
         String password = etPin.getText().toString();
@@ -76,6 +113,9 @@ public class ActMain extends ActBase {
         }
     }
 
+    //----------------------------------------------------------------
+    // Invokes the rest service to get circle details
+    //----------------------------------------------------------------
     private class HttpRequestTask extends AsyncTask<String, Void, Member> {
         @Override
         protected Member doInBackground(String... params) {

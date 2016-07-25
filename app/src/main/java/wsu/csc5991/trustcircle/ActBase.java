@@ -16,6 +16,9 @@ import org.springframework.web.client.RestTemplate;
 
 import wsu.csc5991.trustcircle.vo.Member;
 
+/**
+ * Base class to display the menu across all the app screens
+ */
 public class ActBase extends AppCompatActivity {
 
     @Override

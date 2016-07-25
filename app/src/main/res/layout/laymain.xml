@@ -6,6 +6,10 @@
     android:gravity="center_vertical"
     android:orientation="vertical" >
 
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- SignIn Mobile Number and Pin                        -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
     <EditText
         style="@style/ETStyle"
         android:id="@+id/etPhoneNumber"
@@ -21,6 +25,10 @@
         android:inputType="numberPassword"
         android:layout_marginBottom="30dp"
         />
+
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+    <!-- SignIn and SignUp Button                            -->
+    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
     <Button
         style="@style/BTNStyle"

@@ -4,6 +4,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
+/**
+ * Class to delete a circle
+ * TO-DO: Yet to be implemented
+ */
 public class ActDeleteCircle extends ActBase {
 
     @Override

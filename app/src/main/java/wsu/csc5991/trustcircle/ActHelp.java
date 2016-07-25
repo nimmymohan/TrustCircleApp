@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
 
+/**
+ * Class to display few use cases
+ */
 public class ActHelp extends ActBase {
 
     @Override

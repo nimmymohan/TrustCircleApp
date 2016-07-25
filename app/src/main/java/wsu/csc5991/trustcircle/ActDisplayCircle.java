@@ -21,6 +21,9 @@ import java.util.StringTokenizer;
 import wsu.csc5991.trustcircle.vo.Event;
 import wsu.csc5991.trustcircle.vo.Member;
 
+/**
+ * Class to display signed in member's circle name and circle member's latitude and longitude
+ */
 public class ActDisplayCircle extends ActBase {
 
     TableLayout memberTable;
@@ -43,10 +46,13 @@ public class ActDisplayCircle extends ActBase {
         circleName = (TextView) findViewById(R.id.circleName);
         circleName.setText(extras.getString("circle_name"));
 
-        init(extras);
+        init();
     }
 
-    public void init(Bundle extras) {
+    //----------------------------------------------------------------
+    // Creates the table to display circle member's latitude and longitude
+    //----------------------------------------------------------------
+    public void init() {
         memberTable.setStretchAllColumns(true);
         memberTable.bringToFront();
 
@@ -75,6 +81,9 @@ public class ActDisplayCircle extends ActBase {
         }
     }
 
+    //----------------------------------------------------------------
+    // Adds table header
+    //----------------------------------------------------------------
     private void addHeader() {
         TableRow tr_head = new TableRow(this);
         tr_head.setBackgroundColor(getResources().getColor(R.color.blue));
@@ -108,7 +117,9 @@ public class ActDisplayCircle extends ActBase {
                 LinearLayoutCompat.LayoutParams.WRAP_CONTENT));
     }
 
-
+    //----------------------------------------------------------------
+    // Adds table row
+    //----------------------------------------------------------------
     private void addRow(int count, String name, String latitude, String longitude) {
         TableRow tr = new TableRow(this);
         if(count%2!=0) {

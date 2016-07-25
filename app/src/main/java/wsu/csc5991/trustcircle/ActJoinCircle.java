@@ -22,6 +22,9 @@ import java.util.List;
 import wsu.csc5991.trustcircle.vo.Circle;
 import wsu.csc5991.trustcircle.vo.Member;
 
+/**
+ * Class to let a member join a circle by providing circle name and pin
+ */
 public class ActJoinCircle extends ActBase {
 
     EditText editTextCircleName;
@@ -34,6 +37,11 @@ public class ActJoinCircle extends ActBase {
     int enteredMemberPin;
     Circle memberCircle = null;
 
+    //----------------------------------------------------------------
+    // Validates the inputs
+    // If validation fails, display the error messages
+    // If validation succeeds, invoke rest service to add member to the circle
+    //----------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +66,6 @@ public class ActJoinCircle extends ActBase {
 
         buttonJoinCircle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 boolean isValidInput = true;
                 String circleName = editTextCircleName.getText().toString();
                 String circlePassword = editTextCirclePassword.getText().toString();
@@ -91,6 +98,9 @@ public class ActJoinCircle extends ActBase {
         });
     }
 
+    //----------------------------------------------------------------
+    // Invokes the rest service to add a member to a circle
+    //----------------------------------------------------------------
     private class HttpRequestTask extends AsyncTask<String, Void, Boolean> {
 
         String errorMessage = null;
@@ -167,7 +177,9 @@ public class ActJoinCircle extends ActBase {
         }
     }
 
-
+    //----------------------------------------------------------------
+    // Invokes the rest service to display latitude and longitude of a members of the circle
+    //----------------------------------------------------------------
     private class DisplayCircleTask extends AsyncTask<String, Void, Member> {
         @Override
         protected Member doInBackground(String... params) {

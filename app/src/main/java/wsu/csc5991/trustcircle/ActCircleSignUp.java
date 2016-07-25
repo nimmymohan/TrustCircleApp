@@ -16,6 +16,9 @@ import java.net.URI;
 import wsu.csc5991.trustcircle.vo.Circle;
 import wsu.csc5991.trustcircle.vo.Member;
 
+/**
+ * Class to create a new circle by providing circle name and pin
+ */
 public class ActCircleSignUp extends ActBase {
 
     EditText editTextCircleName;
@@ -25,6 +28,11 @@ public class ActCircleSignUp extends ActBase {
     EditText editTextPrimaryMemberPassword;
     Button buttonCreateCircle;
 
+    //----------------------------------------------------------------
+    // Validates the inputs
+    // If validation fails, display the error messages
+    // If validation succeeds, invoke rest service to create the circle
+    //----------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +43,6 @@ public class ActCircleSignUp extends ActBase {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setIcon(R.mipmap.ic_launcher);
         actionBar.setDisplayShowHomeEnabled(true);
-
-
 
         editTextCircleName = (EditText) findViewById(R.id.editTextCircleName);
         editTextCirclePassword = (EditText) findViewById(R.id.editTextCirclePassword);
@@ -86,6 +92,9 @@ public class ActCircleSignUp extends ActBase {
         });
     }
 
+    //----------------------------------------------------------------
+    // Invokes the rest service to create the circle
+    //----------------------------------------------------------------
     private class HttpRequestTask extends AsyncTask<String, Void, Boolean> {
 
         String errorMessage = null;

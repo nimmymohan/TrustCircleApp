@@ -18,6 +18,9 @@ import java.net.URI;
 
 import wsu.csc5991.trustcircle.vo.Member;
 
+/**
+ * Class to create a new member by providing member details
+ */
 public class ActMemberSignUp extends ActBase {
 
     EditText editTextMobileNumber;
@@ -27,6 +30,11 @@ public class ActMemberSignUp extends ActBase {
     EditText editTextConfirmPassword;
     Button buttonCreateMember;
 
+    //----------------------------------------------------------------
+    // Validates the inputs
+    // If validation fails, display the error messages
+    // If validation succeeds, invoke rest service to create a member
+    //----------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +95,9 @@ public class ActMemberSignUp extends ActBase {
         });
     }
 
+    //----------------------------------------------------------------
+    // Invokes the rest service to create a member
+    //----------------------------------------------------------------
     private class HttpRequestTask extends AsyncTask<String, Void, Member> {
         @Override
         protected Member doInBackground(String... params) {

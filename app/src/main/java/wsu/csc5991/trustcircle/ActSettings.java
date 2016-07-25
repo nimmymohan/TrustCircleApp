@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+/**
+ * Class to change app's background color
+ */
 public class ActSettings extends AppCompatActivity {
 
     Button btnGoToMainPage;
