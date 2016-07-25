@@ -117,11 +117,11 @@ public class ActCircleSignUp extends ActBase {
                         errorMessage = "Trust Circle creation failed!\nInvalid member pin, please enter the correct member pin.";
                     }
                 } else {
-                    errorMessage = "Trust Circle creation failed!\nMember not registered, please sign up the member first.";
+                    errorMessage = "Trust Circle creation failed!";
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                errorMessage = "Trust Circle creation failed!\nMember not registered, please sign up the member first.";
+                errorMessage = "Trust Circle creation failed!";
             }
             return output;
         }

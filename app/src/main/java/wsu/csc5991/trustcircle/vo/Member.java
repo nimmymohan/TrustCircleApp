@@ -1,13 +1,15 @@
 package wsu.csc5991.trustcircle.vo;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.SerializableString;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by sasidhav on 7/15/16.
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Member {
+public class Member implements Serializable {
 
 	private int id;
 	private String firstName;

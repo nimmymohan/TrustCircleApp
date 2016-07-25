@@ -60,7 +60,14 @@ public class ActCircleConfig extends ActBase {
 
         buttonJoinCircle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Bundle extras = getIntent().getExtras();
                 Intent i = new Intent(getApplicationContext(), ActJoinCircle.class);
+
+                System.out.println("member_mobile_number: " + extras.getInt("member_mobile_number"));
+                System.out.println("member_pin: " + extras.getInt("member_pin"));
+                i.putExtra("member_mobile_number",extras.getInt("member_mobile_number"));
+                i.putExtra("member_pin",extras.getInt("member_pin"));
+
                 startActivity(i);
             }
         });

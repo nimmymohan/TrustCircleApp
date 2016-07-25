@@ -18,4 +18,10 @@
         android:orderInCategory="3"
         android:title="Help"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/signOut"
+        android:orderInCategory="4"
+        android:title="Sign Out"
+        app:showAsAction="never" />
 </menu>

@@ -1,5 +1,7 @@
 package wsu.csc5991.trustcircle;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -111,16 +113,24 @@ public class ActMemberSignUp extends ActBase {
         }
 
         @Override
-        protected void onPostExecute(Member member) {
+        protected void onPostExecute(final Member member) {
             if (member != null &&  member.getMobileNumber() >0) {
-                Util.showDialogBox(ActMemberSignUp.this, "Trust Circle Member SignUp", "Member successfully created!");
-                    Intent i = new Intent(getApplicationContext(), ActCircleConfig.class);
-                        i.putExtra("m_Id", member.getId());
-                        i.putExtra("m_Phone", member.getMobileNumber());
-                        i.putExtra("m_first_name", member.getFirstName());
-                        i.putExtra("m_last_name", member.getLastName());
-                        i.putExtra("m_pin", member.getPin());
-                        startActivity(i);
+                AlertDialog alertDialog = new AlertDialog.Builder(ActMemberSignUp.this).create();
+                alertDialog.setTitle("Trust Circle Member SignUp");
+                alertDialog.setMessage("Member successfully created!");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            Intent i = new Intent(getApplicationContext(), ActCircleConfig.class);
+                            i.putExtra("member_mobile_number", member.getMobileNumber());
+                            i.putExtra("member_first_name", member.getFirstName());
+                            i.putExtra("member_last_name", member.getLastName());
+                            i.putExtra("member_pin", member.getPin());
+                            startActivity(i);
+                        }
+                    });
+                alertDialog.show();
             } else {
                 Util.showDialogBox(ActMemberSignUp.this, "Trust Circle Member SignUp", "Member creation failed!");
             }

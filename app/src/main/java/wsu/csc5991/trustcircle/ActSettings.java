@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
-public class ActSettings extends ActBase {
+public class ActSettings extends AppCompatActivity {
 
     Button btnGoToMainPage;
 

@@ -43,6 +43,11 @@ public class ActBase extends AppCompatActivity {
                 startActivity(helpIntent);
                 return true;
 
+            case R.id.signOut:
+                Intent signOutIntent = new Intent(getApplicationContext(), ActMain.class);
+                startActivity(signOutIntent);
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }

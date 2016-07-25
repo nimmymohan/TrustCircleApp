@@ -3,6 +3,7 @@ package wsu.csc5991.trustcircle;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +13,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import wsu.csc5991.trustcircle.vo.Circle;
 import wsu.csc5991.trustcircle.vo.Member;
 
 public class ActMain extends ActBase {
@@ -21,6 +27,7 @@ public class ActMain extends ActBase {
     Button btnSignIn;
     Button btnSignUp;
     int enteredMemberPin;
+    Circle memberCircle = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +85,12 @@ public class ActMain extends ActBase {
                 RestTemplate restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-                String url = getResources().getString(R.string.rest_service_url) + "/member/mobile/" + params[0];
-                member = restTemplate.getForObject(url, Member.class);
+                String getMemberUrl = getResources().getString(R.string.rest_service_url) + "/member/mobile/" + params[0];
+                member = restTemplate.getForObject(getMemberUrl, Member.class);
+
+                String getCircleUrl = getResources().getString(R.string.rest_service_url) + "/circle/event/?mobile=" + params[0];
+                memberCircle = restTemplate.getForObject(getCircleUrl, Circle.class);
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -90,13 +101,21 @@ public class ActMain extends ActBase {
         protected void onPostExecute(Member member) {
             if(member != null) {
                 if (enteredMemberPin == member.getPin()) {
-                    Intent i = new Intent(getApplicationContext(), ActDisplayCircle.class);
-                    i.putExtra("m_id", member.getId());
-                    i.putExtra("m_mobile_number", member.getMobileNumber());
-                    i.putExtra("m_first_name", member.getFirstName());
-                    i.putExtra("m_last_name", member.getLastName());
-                    i.putExtra("m_pin", member.getPin());
-                    startActivity(i);
+                    if (memberCircle != null) {
+                        Intent i = new Intent(getApplicationContext(), ActDisplayCircle.class);
+                        i.putExtra("member_first_name", member.getFirstName());
+                        i.putExtra("member_last_name", member.getLastName());
+                        i.putExtra("circle_name", memberCircle.getName());
+
+                        Bundle memberBundle = new Bundle();
+                        memberBundle.putSerializable("memberList",(Serializable)memberCircle.getMembers());
+                        i.putExtra("memberBundle", memberBundle);
+
+                        startActivity(i);
+                    } else {
+                        Intent i = new Intent(getApplicationContext(), ActCircleConfig.class);
+                        startActivity(i);
+                    }
                 } else {
                     Util.showDialogBox(ActMain.this, "Trust Circle SignIn", "Invalid pin, please enter correct pin!");
                 }

@@ -1,5 +1,8 @@
 package wsu.csc5991.trustcircle;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +14,7 @@ import android.widget.LinearLayout;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +29,10 @@ public class ActJoinCircle extends ActBase {
     EditText editTextMemberMobileNumber;
     EditText editTextMemberPassword;
     Button buttonJoinCircle;
+    String memberMobileNumber;
+    String memberPin;
+    int enteredMemberPin;
+    Circle memberCircle = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,16 @@ public class ActJoinCircle extends ActBase {
         editTextMemberMobileNumber = (EditText) findViewById(R.id.editTextMemberMobileNumber);
         editTextMemberPassword = (EditText) findViewById(R.id.editTextMemberPassword);
         buttonJoinCircle = (Button) findViewById(R.id.buttonJoinCircle);
+
+        Bundle extras = getIntent().getExtras();
+        memberMobileNumber = String.valueOf(extras.getInt("member_mobile_number"));
+        memberPin = String.valueOf(extras.getInt("member_pin"));
+
+        editTextMemberMobileNumber.setText(memberMobileNumber);
+        editTextMemberMobileNumber.setEnabled(false);
+
+        editTextMemberPassword.setText(String.valueOf(extras.getInt("member_pin")));
+        editTextMemberPassword.setEnabled(false);
 
         buttonJoinCircle.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -55,6 +73,8 @@ public class ActJoinCircle extends ActBase {
                     editTextCirclePassword.setError("Circle pin is required to join circle!");
                     isValidInput = false;
                 }
+
+                /*
                 if (editTextMemberMobileNumber.getText().length() != 10) {
                     editTextMemberMobileNumber.setError("Member mobile number should be 10 digits long!");
                     isValidInput = false;
@@ -63,6 +83,7 @@ public class ActJoinCircle extends ActBase {
                     editTextMemberPassword.setError("Member pin is required to join circle!");
                     isValidInput = false;
                 }
+                */
                 if (isValidInput) {
                     new HttpRequestTask().execute(circleName, circlePassword, memberMobileNumber, memberPassword);
                 }
@@ -127,9 +148,71 @@ public class ActJoinCircle extends ActBase {
         protected void onPostExecute(Boolean output) {
             if (output) {
                 Util.showDialogBox(ActJoinCircle.this, "Trust Circle Enrolment", "Trust Circle enrolment successful!");
+
+                AlertDialog alertDialog = new AlertDialog.Builder(ActJoinCircle.this).create();
+                alertDialog.setTitle("Trust Circle Enrolment");
+                alertDialog.setMessage("Trust Circle enrolment successful!");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            new DisplayCircleTask().execute(memberMobileNumber, memberPin);
+                        }
+                    });
+                alertDialog.show();
             } else {
                 errorMessage = errorMessage != null ? errorMessage : "Trust Circle enrolment failed!";
                 Util.showDialogBox(ActJoinCircle.this, "Trust Circle Enrolment", errorMessage);
+            }
+        }
+    }
+
+
+    private class DisplayCircleTask extends AsyncTask<String, Void, Member> {
+        @Override
+        protected Member doInBackground(String... params) {
+            Member member = null;
+            enteredMemberPin = Integer.parseInt(params[1]);
+            try {
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+                String getMemberUrl = getResources().getString(R.string.rest_service_url) + "/member/mobile/" + params[0];
+                member = restTemplate.getForObject(getMemberUrl, Member.class);
+
+                String getCircleUrl = getResources().getString(R.string.rest_service_url) + "/circle/event/?mobile=" + params[0];
+                memberCircle = restTemplate.getForObject(getCircleUrl, Circle.class);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return member;
+        }
+
+        @Override
+        protected void onPostExecute(Member member) {
+            if(member != null) {
+                if (enteredMemberPin == member.getPin()) {
+                    if (memberCircle != null) {
+                        Intent i = new Intent(getApplicationContext(), ActDisplayCircle.class);
+                        i.putExtra("member_first_name", member.getFirstName());
+                        i.putExtra("member_last_name", member.getLastName());
+                        i.putExtra("circle_name", memberCircle.getName());
+
+                        Bundle memberBundle = new Bundle();
+                        memberBundle.putSerializable("memberList",(Serializable)memberCircle.getMembers());
+                        i.putExtra("memberBundle", memberBundle);
+
+                        startActivity(i);
+                    } else {
+                        Intent i = new Intent(getApplicationContext(), ActCircleConfig.class);
+                        startActivity(i);
+                    }
+                } else {
+                    Util.showDialogBox(ActJoinCircle.this, "Trust Circle SignIn", "Invalid pin, please enter correct pin!");
+                }
+            } else {
+                Util.showDialogBox(ActJoinCircle.this, "Trust Circle SignIn", "Invalid member, please sign-up first!");
             }
         }
     }

@@ -23,14 +23,12 @@
         style="@style/BTNStyle"
         android:id="@+id/buttonEditCircle"
         android:text="Edit Circle"
-        android:enabled="false"
         />
 
     <Button
         style="@style/BTNStyle"
         android:id="@+id/buttonDeleteCircle"
         android:text="Delete Circle"
-        android:enabled="false"
         />
 
 </LinearLayout>
